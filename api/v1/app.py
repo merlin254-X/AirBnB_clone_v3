@@ -20,22 +20,27 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 app.url_map.strict_slashes = False
 
 # Cleanup resource at the end of each request
+
+
 @app.teardown_appcontext
 def cleanup(_):
     """Close the storage connection"""
     storage.close()
 
 # Handle 404 errors with a custom JSON response
+
+
 @app.errorhandler(404)
 def not_found(_):
     """Return a JSON response for 404 errors"""
     return jsonify({"error": "Not found"}), 404
+
 
 # Main entry point for the Flask app
 if __name__ == "__main__":
     # Retrieve host and port from environment variables, with defaults
     host = getenv("HBNB_API_HOST", "0.0.0.0")
     port = getenv("HBNB_API_PORT", "5000")
-    
+
     # Start the Flask app with specified host and port
     app.run(host=host, port=port, threaded=True)

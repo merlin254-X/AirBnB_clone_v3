@@ -12,7 +12,6 @@ def returnstuff():
     '''return stuff'''
     return jsonify(status='OK')
 
-from models import storage
 
 @app_views.route('/stats', strict_slashes=False)
 def get_stats():
